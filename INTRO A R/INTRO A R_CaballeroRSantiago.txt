@@ -1,0 +1,75 @@
+#Coded by Caballero Rosas Santiago
+##PRÁCTICA POLINIZADORES 
+
+#Cargamos la librería BoolNet
+library(BoolNet)
+
+#Establecemos el directorio donde se encuentra la red 
+setwd("C:/Users/HOME/Desktop/BIOLOGÍA DE SISTEMAS/Polinizadores/"
+
+#############################
+#TUTORIAL
+
+#Cargamos la red 
+red_clase <- loadNetwork("red_clase1.txt")
+red_clase
+#Graficamos la red tomando activación e inhibición de igual forma.
+plotNetworkingWiring(red_clase)
+
+#Se calculan los atractores de la red
+attr <- getAttractors(red_clase)
+attr
+
+#Fijamos una condición inicial de 1,1,1
+path1 <- getPathToAttractor(red_clase, c(1,1,1))
+path1
+
+#Comprobamos que la red alcance un estado estacionario en 1,1,0
+path2 <- getPathToAttractor(red_clase, c(1,1,0))
+path2
+
+#Graficamos los atractores en general con dos funciones
+plotAttractors(attr)
+plotStateGraph(attr)
+
+#Se observa la dinámica de "Path 1"
+plotSequence(sequence=path1)
+
+#############################
+#PRÁCTICA I
+
+#Cargamos la red
+red <- loadNetwork("red_planta_polinizador.txt")
+red
+#Graficamos la red.
+plotNetworkingWiring(red)
+
+#Calculamos los atractores de la red
+attr <- getAttractors(red)
+attr
+#Attractor 1 is a simple attractor consisting of 1 state(s) and has a basin of 18 state(s): es el 00000
+#Attractor 2 is a simple attractor consisting of 1 state(s) and has a basin of 2 state(s): 11101
+#Attractor 3 is a simple attractor consisting of 2 state(s) and has a basin of 12 state(s): 11100 y 00001
+
+#Graficamos los atractores
+plotAttractors(attr)
+plotStateGraph(attr)
+
+#Definimos la condición inicial en (0,1,1,1,1)y vemos a qué atractor nos lleva
+path_1 <- getPathToAttractor(red, c(0,1,1,1,1))
+path_1
+plotSequence(sequence=path_1)
+#Nos lleva a 00000
+
+#Probemos ahora en (0,1,0,1,0) y en (1,0,0,0,1)
+path_2 <- getPathToAttractor(red, c(0,1,0,1,0))
+path_2
+plotSequence(sequence=path_2)
+#Nos lleva a 00000
+
+path_3 <- getPathToAttractor(red, c(1,0,0,0,1))
+path_3
+plotSequence(sequence=path_3)
+#Nos lleva a 10000
+
+getBasinOfAttraction(attr, 1)
