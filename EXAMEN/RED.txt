@@ -1,0 +1,3 @@
+targets,factors
+cIts, IPTG & !Lac1
+Lac1, Lac1 & !cIts
